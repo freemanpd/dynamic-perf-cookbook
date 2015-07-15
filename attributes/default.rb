@@ -1,0 +1,1 @@
+default[:dynamic-perf][:kernel_vaule]=0
