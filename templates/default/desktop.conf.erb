@@ -3,7 +3,7 @@
 #
 
 [main]
-include=balanced
+include="<%= node['dynamic-perf']['desktop_include'] %>"
 
 [sysctl]
-kernel.sched_autogroup_enabled=1
+kernel.sched_autogroup_enabled="<%= node['dynamic-perf']['desktop_include'] %>"

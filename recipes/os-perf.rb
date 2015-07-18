@@ -1,10 +1,17 @@
+#
+# Cookbook Name:: dynamic-perf
+# Author: Patrick Freeman
+# Recipe:: os-perf
+#
+# Copyright 2015
+
 # os perf
 
-# vars
+# vars. loads all external variables from a single location
+# require_relative 'vars'
 kv_default = "#{node[:'dynamic-perf'][:kernel_vaule]}"
 default_profile = "#{node[:'dynamic-perf'][:tune_profile]}"
 default_recipe = "#{node[:'dynamic-perf'][:default_tune_recipe]}"
-
 # dynamic profiles
 # include_recipe 'dynamic-perf::#{default_tune_recipe}'
 
@@ -24,7 +31,7 @@ execute 'numactl' do
   not_if {File.exists?("/etc/sysctl.d/numactl.conf") }
 end
 
-%w{tuned numactl irqbalance sysstat}.each do |pak|
+%w{tuned numactl numactl-devel irqbalance sysstat}.each do |pak|
   package "#{pak}" do
     action :install
     notifies :run, 'execute[numactl]', :immediately

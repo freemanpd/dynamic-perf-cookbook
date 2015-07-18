@@ -3,11 +3,11 @@
 #
 
 [main]
-include=throughput-performance
+include= "<%= node['dynamic-perf']['sap_include'] %>"
 
 [sysctl]
-kernel.sem = 1250 256000 100 8192
-vm.max_map_count = 1000000
+kernel.sem = "<%= node['dynamic-perf']['sap_kernel_sem'] %>"
+vm.max_map_count = "<%= node['dynamic-perf']['sap_vm_max_map_count'] %>"
 
 [script]
-script=script.sh
+script="<%= node['dynamic-perf']['sap_script'] %>"

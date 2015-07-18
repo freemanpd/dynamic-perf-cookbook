@@ -3,32 +3,33 @@
 #
 
 [cpu]
-governor=ondemand
-energy_perf_bias=powersave
+governor="<%= node['dynamic-perf']['powersave_govenor'] %>"
+energy_perf_bias="<%= node['dynamic-perf']['powersave_energy_perf_bias'] %>"
 
 [eeepc_she]
 
 [vm]
 
 [audio]
-timeout=10
+timeout="<%= node['dynamic-perf']['powersave_timeout'] %>"
 
 [video]
-radeon_powersave=auto
+radeon_powersave="<%= node['dynamic-perf']['powersave_radeon_powersave'] %>"
 
 [disk]
 # Comma separated list of devices, all devices if commented out.
 # devices=sda
-alpm=min_power
+alpm="<%= node['dynamic-perf']['powersave_alpm'] %>"
 
 [net]
 # Comma separated list of devices, all devices if commented out.
-# devices=eth0
+# devices="<%= node['dynamic-perf']['powersave_net'] %>"
+# . each do ????????
 
 [sysctl]
-vm.laptop_mode=5
-vm.dirty_writeback_centisecs=1500
-kernel.nmi_watchdog=0
+vm.laptop_mode="<%= node['dynamic-perf']['powersave_vm_laptop_mode'] %>"
+vm.dirty_writeback_centisecs="<%= node['dynamic-perf']['powersave_vm_dirty_writeback_centisecs'] %>"
+kernel.nmi_watchdog="<%= node['dynamic-perf']['powersave_kernel_nmi_watchdog'] %>"
 
 [script]
-script=script.sh
+script="<%= node['dynamic-perf']['powersave_script'] %>"

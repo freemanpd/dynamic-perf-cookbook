@@ -3,13 +3,14 @@
 #
 
 [main]
-include=latency-performance
+include="<%= node['dynamic-perf']['network_latency_include'] %>"
+
 
 [vm]
-transparent_hugepages=never
+transparent_hugepages="<%= node['dynamic-perf']['network_latency_transparent_hugepages'] %>"
 
 [sysctl]
-net.core.busy_read=50
-net.core.busy_poll=50 
-net.ipv4.tcp_fastopen=3
-kernel.numa_balancing=0
+net.core.busy_read="<%= node['dynamic-perf']['network_latency_net_core_busy_read'] %>"
+net.core.busy_poll="<%= node['dynamic-perf']['network_latency_net_core_busy_poll'] %>"
+net.ipv4.tcp_fastopen="<%= node['dynamic-perf']['network_latency_net_ipv4_tcp_fastopen'] %>"
+kernel.numa_balancing="<%= node['dynamic-perf']['network_latency_kernel_numa_balancing'] %>"

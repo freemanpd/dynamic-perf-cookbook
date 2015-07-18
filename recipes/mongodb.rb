@@ -1,4 +1,9 @@
-
+#
+# Cookbook Name:: dynamic-perf
+# Author: Patrick Freeman
+# Recipe:: mongo
+#
+# Copyright 2015
 
 # numa disable
 notifies :stop,:disable, 'service[numactl]'
