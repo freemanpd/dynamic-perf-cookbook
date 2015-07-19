@@ -11,19 +11,26 @@
 
 [
 'blktrace',
+'ethtool',
+'dropwatch',
 'dstat',
 'ethtool',
 'gnuplot',
 'hwloc',
+'kernel-tools',
 'ltrace',
 'netsniff-ng',
 'net-tools',
 'pciutils',
 'perf',
+'powertop',
 'procps-ng',
-'psmisc', 
+'psmisc',
+'sos', 
 'strace',
-'tcpdump'
+'tcpdump',
+'tuna',
+'trace-cmd'
 ].each do |pak|
 	yum_package "#{pak}" do
 	  action :install

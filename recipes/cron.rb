@@ -6,23 +6,25 @@
 # Copyright 2015
 
 # optional cron jobs
-
-#require_relative 'vars'
+include_recipe 'dynamic-perf::config-perf'
 
 kv_default = "#{node[:'dynamic-perf'][:kernel_vaule]}"
-default_profile = "#{node[:'dynamic-perf'][:tune_profile]}"
-default_recipe = "#{node[:'dynamic-perf'][:default_tune_recipe]}"
+primary_default_profile = "#{node[:'dynamic-perf'][:tune_profile]}"
+secondary_default_profile = "#{node[:'dynamic-perf'][:secondary_tune_profile]}"
+default_recipe = "#{node[:'dynamic-perf'][:tune_recipe]}"
 
-# cron dynamic powersave
-cron 'powersave' do
+
+# cron dynamic primary
+cron 'primary-perf' do
   hour '0'
   minute '0'
-  command 'tuned-adm  profile powersave'
+  command 'tuned-adm  profile #{primary_default_profile}'
 end
 
-# cron dynamic profile
-cron 'dynamic' do
+# cron dynamic secondary
+cron 'secondary-perf' do
   hour '6'
   minute '0'
-  command 'tuned-adm  profile #{default_profile}'
+  command 'tuned-adm  profile #{secondary_default_profile}'
 end
+

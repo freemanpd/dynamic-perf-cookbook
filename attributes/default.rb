@@ -1,9 +1,11 @@
 # extensible params
 default[:'dynamic-perf'][:kernel_vaule] = '0'
-default[:'dynamic-perf'][:tune_profile] = "network-throughput"
+default[:'dynamic-perf'][:primary_tune_profile] = "dynamic"
+default[:'dynamic-perf'][:secondary_tune_profile] = "dynamic"
 default[:'dynamic-perf'][:default_tune_recipe] = "nil"
 
 #### tuned configs ####
+
 # balance.conf
 default[:'dynamic-perf'][:balance_governor] = "ondemand"
 default[:'dynamic-perf'][:balance_energy_perf_bias] = "normal"
@@ -69,3 +71,25 @@ default[:'dynamic-perf'][:virtual_guest_vm_swappiness] = "30"
 default[:'dynamic-perf'][:virtual_host_include] = "throughput-performance"
 default[:'dynamic-perf'][:virtual_host_vm_dirty_background_ratio] = "5"
 default[:'dynamic-perf'][:virtual_host_kernel_sched_migration_cost_ns] = "5000000"
+
+# config perf tuning
+
+# dynamic.conf
+default[:'dynamic-perf'][:default_tune_recipe] = "nil"
+
+# node
+default[:'dynamic-perf'][:node_http_globalAgent_maxSocket] = "1000"
+default[:'dynamic-perf'][:node_net_ipv4_ip_local_port_range ] = "18000 65535"
+default[:'dynamic-perf'][:node_net_ipv4_netfilter_ip_conntrack_tcp_timeout_time_wait] = "1"
+default[:'dynamic-perf'][:node_net_netfilter_nf_conntrack_tcp_timeout_established] = "600"
+
+# docker
+
+# mongo
+default[:'dynamic-perf'][:mongodb_vm_nr_hugepages] = "0"
+default[:'dynamic-perf'][:mongodb_vm_nr_hugepages_mempolicy] = "0"
+default[:'dynamic-perf'][:mongodb_vm_nr_overcommit_hugepage] = "0"	
+
+
+
+

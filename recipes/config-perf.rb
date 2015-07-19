@@ -10,21 +10,17 @@
 # vars. loads all external variables from a single location
 # require_relative 'vars'
 kv_default = "#{node[:'dynamic-perf'][:kernel_vaule]}"
-default_profile = "#{node[:'dynamic-perf'][:tune_profile]}"
-default_recipe = "#{node[:'dynamic-perf'][:default_tune_recipe]}"
+primary_default_profile = "#{node[:'dynamic-perf'][:primary_tune_profile]}"
+secondary_default_profile = "#{node[:'dynamic-perf'][:secondary_tune_profile]}"
+default_recipe = "#{node[:'dynamic-perf'][:tune_recipe]}"
+
 
 # dynamic profiles
-template "/usr/lib/tuned/#{default_profile}/tuned.conf" do
-  source "#{default_profile}.conf.erb"
+template "/etc/tuned/#{primary_default_profile}/tuned.conf" do
+  source "#{primary_default_profile}.conf.erb"
   owner "root"
   group "root"
   mode "0644"
-end
-
-# profile to execute
-execute "dynamic-tune" do
-  command "tuned-adm profile #{default_profile}"
-  action :run
 end
 
 # dynamic disable?
