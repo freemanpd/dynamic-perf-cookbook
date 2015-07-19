@@ -27,6 +27,7 @@ default[:'dynamic-perf'][:network_latency_net_ipv4_tcp_fastopen] = "3"
 default[:'dynamic-perf'][:network_latency_kernel_numa_balancing] = "0"
 
 # network throughput
+# note: docker, lxc also use this profile
 default[:'dynamic-perf'][:network_throughput_include] = "throughput-performance"
 default[:'dynamic-perf'][:network_throughput_net_ipv4_tcp_rmem] = "4096 87380 16777216"
 default[:'dynamic-perf'][:network_throughput_net_ipv4_tcp_wmem] = "4096 16384 16777216"
