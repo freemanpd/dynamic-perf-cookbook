@@ -17,7 +17,8 @@ default[:'dynamic-perf'][:balance_radeon_disk] = "nil"  # need .each in config f
 default[:'dynamic-perf'][:desktop_include] = "balanced"
 default[:'dynamic-perf'][:desktop_kernel_sched] = "1"
 
-# network-latency
+# network-latency default profile 
+# note: jenkins, tomcat also use this profile
 default[:'dynamic-perf'][:network_latency_include] = "latency_performance"
 default[:'dynamic-perf'][:network_latency_transparent_hugepages] = "never"
 default[:'dynamic-perf'][:network_latency_net_core_busy_read] = "50"
@@ -83,13 +84,21 @@ default[:'dynamic-perf'][:node_net_ipv4_ip_local_port_range ] = "18000 65535"
 default[:'dynamic-perf'][:node_net_ipv4_netfilter_ip_conntrack_tcp_timeout_time_wait] = "1"
 default[:'dynamic-perf'][:node_net_netfilter_nf_conntrack_tcp_timeout_established] = "600"
 
-# docker
+# nosql 
+# note: mongodb, cache use these attributes
+default[:'dynamic-perf'][:nosql_vm_nr_hugepages] = "0"
+default[:'dynamic-perf'][:nosql_vm_nr_hugepages_mempolicy] = "0"
+default[:'dynamic-perf'][:nosql_vm_nr_overcommit_hugepage] = "0"	
 
-# mongo
-default[:'dynamic-perf'][:mongodb_vm_nr_hugepages] = "0"
-default[:'dynamic-perf'][:mongodb_vm_nr_hugepages_mempolicy] = "0"
-default[:'dynamic-perf'][:mongodb_vm_nr_overcommit_hugepage] = "0"	
+# elasticsearch
+default[:'dynamic-perf'][:elastic_vm_nr_hugepages] = "0"
+default[:'dynamic-perf'][:elastic_vm_nr_hugepages_mempolicy] = "0"
+default[:'dynamic-perf'][:elastic_vm_nr_overcommit_hugepage] = "0"	
 
+# SQL
+# note: postgres uses these attributes
+default[:'dynamic-perf'][:sql_kernel_shmmax] = "17179869184"
+default[:'dynamic-perf'][:sql_kernel_shmall] = "4194304"
 
 
 

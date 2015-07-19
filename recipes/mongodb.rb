@@ -42,12 +42,13 @@ end
 bash 'node-configs' do
   user 'root'
   code <<-EOH
-  echo "[sysctl]" > /etc/tuned/dynamic/tuned.conf
-  echo "vm.nr_hugepages=#{node[:'dynamic-perf'][:mongodb_vm_nr_hugepages]}" >> /etc/tuned/dynamic/tuned.conf
-  echo "vm.nr_hugepages_mempolicy=#{node[:'dynamic-perf'][:mongodb_vm_nr_hugepages_mempolicy]}" >> /etc/tuned/dynamic/tuned.conf
-  echo "vm.nr_overcommit_hugepages=#{node[:'dynamic-perf'][:mongodb_vm_nr_overcommit_hugepage]}" >> /etc/tuned/dynamic/tuned.conf
+  echo "#mongodb perf profile" > /etc/tuned/dynamic/tuned.conf
+  echo "[sysctl]" >> /etc/tuned/dynamic/tuned.conf
+  echo "vm.nr_hugepages=#{node[:'dynamic-perf'][:nosql_vm_nr_hugepages]}" >> /etc/tuned/dynamic/tuned.conf
+  echo "vm.nr_hugepages_mempolicy=#{node[:'dynamic-perf'][:nosql_vm_nr_hugepages_mempolicy]}" >> /etc/tuned/dynamic/tuned.conf
+  echo "vm.nr_overcommit_hugepages=#{node[:'dynamic-perf'][:nosql_vm_nr_overcommit_hugepage]}" >> /etc/tuned/dynamic/tuned.conf
   EOH
-  notifies :run, 'execute[numactl]'
+  notifies :run, 'execute[numactl]', :immediately
 end
 
 # profile to execute
