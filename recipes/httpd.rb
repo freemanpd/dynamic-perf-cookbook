@@ -22,11 +22,27 @@ primary_default_profile = "#{node[:'dynamic-perf'][:primary_tune_profile]}"
 secondary_default_profile = "#{node[:'dynamic-perf'][:secondary_tune_profile]}"
 default_recipe = "#{node[:'dynamic-perf'][:tune_recipe]}"
 
+# disable numa 
+# note: it is recommended that you enable numa for httpd
+execute 'numactl-persistent' do
+  command "echo 'kernel.numa_balancing = #{kv_default}' >> /etc/sysctl.d/numactl.conf"
+  action :nothing
+  notifies :run, 'execute[numactl-persistent]'
+  not_if {File.exists?("/etc/sysctl.d/numactl.conf") }
+end
+
+# numactl
+# note: it is recommended that you enable numa for httpd
+execute 'numactl' do
+  command "echo #{kv_default} > /proc/sys/kernel/numa_balancing"
+  action :nothing
+  notifies :run, 'execute[numactl-persistent]', :immediately
+  not_if {File.exists?("/etc/sysctl.d/numactl.conf") }
+end
+
 # profile to execute
 execute "dynamic-tune" do
   command "tuned-adm profile #{primary_default_profile}"
   action :run
+  notifies :run, 'execute[numactl]'
 end
-
-# numa enabled
-notifies :start,:enable, 'service[numactl]'

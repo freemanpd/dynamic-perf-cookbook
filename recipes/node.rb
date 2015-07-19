@@ -52,10 +52,26 @@ end
 #   echo "net.ipv4.netfilter.ip_conntrack_tcp_timeout_time_wait=#{node[:'dynamic-perf'][:node_net_ipv4_netfilter_ip_conntrack_tcp_timeout_time_wait]}" >> /etc/tuned/dynamic/tuned.conf
 
 
+# disable numa
+execute 'numactl-persistent' do
+  command "echo 'kernel.numa_balancing = #{kv_default}' >> /etc/sysctl.d/numactl.conf"
+  action :nothing
+  notifies :run, 'execute[numactl-persistent]'
+  not_if {File.exists?("/etc/sysctl.d/numactl.conf") }
+end
+
+# numactl
+execute 'numactl' do
+  command "echo #{kv_default} > /proc/sys/kernel/numa_balancing"
+  action :nothing
+  notifies :run, 'execute[numactl-persistent]', :immediately
+  not_if {File.exists?("/etc/sysctl.d/numactl.conf") }
+end
+
 # profile to execute
 execute "dynamic-tune" do
   command "tuned-adm profile #{primary_default_profile}"
   action :run
+  notifies :run, 'execute[numactl]'
 end
-
 
