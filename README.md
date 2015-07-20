@@ -1,6 +1,6 @@
 dynamic-perf Cookbook
 ===============
-This cookbook installs Tuned and allows you tool dynamically configure default profiles and  application specific profiles on CentOS and RedHat operating systems.
+This cookbook installs Tuned and allows you to dynamically configure default profiles and application specific profiles on CentOS and RedHat operating systems.
 
 Requirements
 ------------
