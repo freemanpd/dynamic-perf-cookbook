@@ -10,10 +10,11 @@ include_recipe 'dynamic-perf::dynamic'
 include_recipe 'dynamic-perf::config-perf'
 
 # vars
-kv_default = "#{node[:'dynamic-perf'][:kernel_vaule]}"
-primary_default_profile = "#{node[:'dynamic-perf'][:primary_tune_profile]}"
-secondary_default_profile = "#{node[:'dynamic-perf'][:secondary_tune_profile]}"
-default_recipe = "#{node[:'dynamic-perf'][:tune_recipe]}"
+kv_default = "#{node['dynamic-perf']['kernel_vaule']}"
+primary_default_profile = "#{node['dynamic-perf']['primary_tune_profile']}"
+secondary_default_profile = "#{node['dynamic-perf']['secondary_tune_profile']}"
+default_recipe = "#{node['dynamic-perf']['tune_recipe']}"
+
 
 # sshd service
 service 'sshd' do
@@ -43,8 +44,8 @@ bash 'node-configs' do
   user 'root'
   code <<-EOH
   echo "[sysctl]" > /etc/tuned/dynamic/tuned.conf
-  echo "net.ipv4.ip_local_port_range=#{node[:'dynamic-perf'][:node_net_ipv4_ip_local_port_range]}" >> /etc/tuned/dynamic/tuned.conf
-  echo "net.netfilter.nf_conntrack_tcp_timeout_established=#{node[:'dynamic-perf'][:node_net_netfilter_nf_conntrack_tcp_timeout_established]}" >> /etc/tuned/dynamic/tuned.conf
+  echo "net.ipv4.ip_local_port_range=#{node['dynamic-perf']['node_net_ipv4_ip_local_port_range']}" >> /etc/tuned/dynamic/tuned.conf
+  echo "net.netfilter.nf_conntrack_tcp_timeout_established=#{node['dynamic-perf']['node_net_netfilter_nf_conntrack_tcp_timeout_established']}" >> /etc/tuned/dynamic/tuned.conf
   EOH
 end
 

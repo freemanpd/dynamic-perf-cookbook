@@ -10,10 +10,10 @@ include_recipe 'dynamic-perf::dynamic'
 include_recipe 'dynamic-perf::config-perf'
 
 # vars
-kv_default = "#{node[:'dynamic-perf'][:kernel_vaule]}"
-primary_default_profile = "#{node[:'dynamic-perf'][:primary_tune_profile]}"
-secondary_default_profile = "#{node[:'dynamic-perf'][:secondary_tune_profile]}"
-default_recipe = "#{node[:'dynamic-perf'][:tune_recipe]}"
+kv_default = "#{node['dynamic-perf']['kernel_vaule']}"
+primary_default_profile = "#{node['dynamic-perf']['primary_tune_profile']}"
+secondary_default_profile = "#{node['dynamic-perf']['secondary_tune_profile']}"
+default_recipe = "#{node['dynamic-perf']['tune_recipe']}"
 
 # disable numa 
 # note: it is recommended that you disable
@@ -46,8 +46,8 @@ bash 'node-configs' do
   code <<-EOH
   echo "#sql perf profile" > /etc/tuned/dynamic/tuned.conf
   echo "[sysctl]" >> /etc/tuned/dynamic/tuned.conf
-  echo "kernel.shmmax=#{node[:'dynamic-perf'][:sql_kernel_shmmax]}" >> /etc/tuned/dynamic/tuned.conf
-  echo "kernel.shmall=#{node[:'dynamic-perf'][:sql_kernel_shmall]}" >> /etc/tuned/dynamic/tuned.conf
+  echo "kernel.shmmax=#{node['dynamic-perf']['sql_kernel_shmmax']}" >> /etc/tuned/dynamic/tuned.conf
+  echo "kernel.shmall=#{node['dynamic-perf']['sql_kernel_shmall']}" >> /etc/tuned/dynamic/tuned.conf
   EOH
   notifies :run, 'execute[numactl]', :immediately
 end

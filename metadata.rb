@@ -1,6 +1,6 @@
 name             'dynamic-perf'
-maintainer       'YOUR_COMPANY_NAME'
-maintainer_email 'YOUR_EMAIL'
+maintainer       'Patrick Freeman'
+maintainer_email 'freemanpd36@gmail.com'
 license          'All rights reserved'
 description      'Installs/Configures dynamic-perf'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))

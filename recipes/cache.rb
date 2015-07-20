@@ -10,10 +10,11 @@ include_recipe 'dynamic-perf::dynamic'
 include_recipe 'dynamic-perf::config-perf'
 
 # vars
-kv_default = "#{node[:'dynamic-perf'][:kernel_vaule]}"
-primary_default_profile = "#{node[:'dynamic-perf'][:primary_tune_profile]}"
-secondary_default_profile = "#{node[:'dynamic-perf'][:secondary_tune_profile]}"
-default_recipe = "#{node[:'dynamic-perf'][:tune_recipe]}"
+kv_default = "#{node['dynamic-perf']['kernel_vaule']}"
+primary_default_profile = "#{node['dynamic-perf']['primary_tune_profile']}"
+secondary_default_profile = "#{node['dynamic-perf']['secondary_tune_profile']}"
+default_recipe = "#{node['dynamic-perf']['tune_recipe']}"
+
 
 # disable numa
 execute 'numactl-persistent' do
@@ -44,9 +45,9 @@ bash 'node-configs' do
   code <<-EOH
   echo "#cache perf profile" > /etc/tuned/dynamic/tuned.conf
   echo "[sysctl]" >> /etc/tuned/dynamic/tuned.conf
-  echo "vm.nr_hugepages=#{node[:'dynamic-perf'][:nosql_vm_nr_hugepages]}" >> /etc/tuned/dynamic/tuned.conf
-  echo "vm.nr_hugepages_mempolicy=#{node[:'dynamic-perf'][:nosql_vm_nr_hugepages_mempolicy]}" >> /etc/tuned/dynamic/tuned.conf
-  echo "vm.nr_overcommit_hugepages=#{node[:'dynamic-perf'][:nosql_vm_nr_overcommit_hugepage]}" >> /etc/tuned/dynamic/tuned.conf
+  echo "vm.nr_hugepages=#{node['dynamic-perf']['nosql_vm_nr_hugepages']}" >> /etc/tuned/dynamic/tuned.conf
+  echo "vm.nr_hugepages_mempolicy=#{node['dynamic-perf']['nosql_vm_nr_hugepages_mempolicy']}" >> /etc/tuned/dynamic/tuned.conf
+  echo "vm.nr_overcommit_hugepages=#{node['dynamic-perf']['nosql_vm_nr_overcommit_hugepage']}" >> /etc/tuned/dynamic/tuned.conf
   EOH
   notifies :run, 'execute[numactl]', :immediately
 end
