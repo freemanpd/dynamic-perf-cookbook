@@ -41,7 +41,7 @@ execute 'copy' do
   not_if {File.exists?("/etc/tuned/dynamic/tuned.conf") }
 end
 
-# mongodb performance tuning 
+# elasticsearch performance tuning 
 bash 'node-configs' do
   user 'root'
   code <<-EOH
