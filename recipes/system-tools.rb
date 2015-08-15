@@ -17,6 +17,7 @@
 'ethtool',
 'gnuplot',
 'hwloc',
+'iftop',
 'kernel-tools',
 'ltrace',
 'netsniff-ng',
